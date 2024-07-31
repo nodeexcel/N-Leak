@@ -1,0 +1,70 @@
+{
+  "name": "nleak",
+  "description": "Automatical memory detection and diagnosis tool for NodeJS.",
+  "version": "0.1.0",
+  "main": "index.js",
+  "bin": {
+    "nleak": "./build/core/cli/nleak.js"
+  },
+  "scripts": {
+    "dev": "nodemon",
+    "test:driver": "npx tsc && cd build/core/cli && node nleak.js run --config ../../guest/config.js --out ../../ --guest-app-entry ../../guest/wrapper.js",
+    "test:find-leaks": "rm -rf build && npx tsc && cd build/core/cli && node nleak.js run --config ../../guest/config.js --out ../../ --guest-app-entry ../../guest/test_apps/app_1.js",
+    "test:diagnosis-leaks": "rm -rf build && npx tsc && cd build/core/cli && node nleak.js run --config ../../guest/config.js --out ../../ --guest-app-entry ../../guest/wrapper.js",
+    "test:leak": "env mocha -r ts-node/register 'test/leak_test.ts'",
+    "test:no-leak": "env mocha -r ts-node/register 'test/no_leak_test.ts'",
+    "test:closure-leak": "env mocha -r ts-node/register 'test/closure_leak_test.ts'",
+    "test:closure-no-leak": "env mocha -r ts-node/register 'test/closure_no_leak_test.ts'",
+    "test:unit": "env mocha -r ts-node/register 'test/*.ts' > unit_test.log",
+    "test:rewrite": "rm -rf build && npx tsc && node build/guest/wrapper.js",
+    "test": "npm run test:leak &&  npm run test:no-leak && npm run test:closure-leak && npm run test:closure-no-leak"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nleak/nleak.git"
+  },
+  "keywords": [
+    "NodeJS",
+    "memory",
+    "leak",
+    "detection",
+    "diagnosis"
+  ],
+  "author": "NLeak Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nleak/nleak/issues"
+  },
+  "homepage": "https://github.com/nleak/nleak#readme",
+  "devDependencies": {
+    "@babel/core": "^7.19.6",
+    "@babel/preset-env": "^7.19.4",
+    "@babel/preset-react": "^7.18.6",
+    "@types/babel__core": "^7.1.19",
+    "@types/buble": "^0.20.1",
+    "@types/chai": "^4.3.3",
+    "@types/chrome-remote-interface": "^0.31.4",
+    "@types/esprima": "^4.0.3",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^18.7.23",
+    "@types/node-fetch": "^2.6.2",
+    "@types/progress": "^2.0.5",
+    "@types/yargs": "^17.0.13",
+    "chai": "^4.3.6",
+    "mocha": "^10.0.0",
+    "nodemon": "^2.0.20",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.4"
+  },
+  "dependencies": {
+    "astring": "^1.8.3",
+    "buble": "^0.20.0",
+    "chrome-remote-interface": "^0.31.3",
+    "error-stack-parser": "^2.1.4",
+    "esprima": "^4.0.1",
+    "node-fetch": "^2.6.7",
+    "progress": "^2.0.3",
+    "source-map-support": "^0.5.21",
+    "yargs": "^17.6.0"
+  }
+}
